@@ -31,7 +31,7 @@ const fonts = {
  * Theme Colors
  */
 const colorsRaw = {
-  white: '#fff',
+  white: 'hotpink',
   grayLight: '#eff0f4',
   gray: '#798291',
   grayDark: '#313d3e',
@@ -349,8 +349,8 @@ const reactSelectStyles = {
     backgroundColor: state.isSelected
       ? `${colors.active}`
       : state.isFocused
-      ? `${colors.activeBackground}`
-      : 'transparent',
+        ? `${colors.activeBackground}`
+        : 'transparent',
     paddingLeft: '22px',
   }),
   menu: styles => ({ ...styles, right: 0, zIndex: 300 }),
@@ -382,7 +382,7 @@ const reactSelectStyles = {
 
 const GlobalStyles = () => (
   <Global
-    styles={css`
+    styles={ css`
       *,
       *:before,
       *:after {
