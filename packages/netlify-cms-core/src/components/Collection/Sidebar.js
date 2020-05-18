@@ -7,6 +7,7 @@ import { translate } from 'react-polyglot';
 import { NavLink } from 'react-router-dom';
 import { Icon, components, colors, colorsRaw, lengths } from 'netlify-cms-ui-default';
 import { searchCollections } from 'Actions/collections';
+import axios from 'axios';
 
 const styles = {
   sidebarNavLinkActive: css`
@@ -108,10 +109,10 @@ class Sidebar extends React.Component {
   renderLink = collection => {
     const collectionName = collection.get('name');
     return (
-      <li key={collectionName}>
-        <SidebarNavLink to={`/collections/${collectionName}`} activeClassName="sidebar-active">
+      <li key={ collectionName }>
+        <SidebarNavLink to={ `/collections/${collectionName}` } activeClassName="sidebar-active">
           <Icon type="write" />
-          {collection.get('label')}
+          { collection.get('label') }
         </SidebarNavLink>
       </li>
     );
@@ -123,17 +124,26 @@ class Sidebar extends React.Component {
 
     return (
       <SidebarContainer>
-        <SidebarHeading>{t('collection.sidebar.collections')}</SidebarHeading>
+        <SidebarHeading>{ t('collection.sidebar.collections') }</SidebarHeading>
         <SearchContainer>
           <Icon type="search" size="small" />
           <SearchInput
-            onChange={e => this.setState({ query: e.target.value })}
-            onKeyDown={e => e.key === 'Enter' && searchCollections(query)}
-            placeholder={t('collection.sidebar.searchAll')}
-            value={query}
+            onChange={ e => this.setState({ query: e.target.value }) }
+            onKeyDown={ e => e.key === 'Enter' && searchCollections(query) }
+            placeholder={ t('collection.sidebar.searchAll') }
+            value={ query }
           />
         </SearchContainer>
-        <SidebarNavList>{collections.toList().map(this.renderLink)}</SidebarNavList>
+        <SidebarNavList>{ collections.toList().map(this.renderLink) }</SidebarNavList>
+
+        <button
+          onClick={ () => {
+            axios.get('https://us-central1-stars-fn.cloudfunctions.net/helloTest')
+              // .then(res => res.json())
+              .then(result => console.log(result))
+              .catch(e => console.log(e))
+          } }
+        >HELLO</button>
       </SidebarContainer>
     );
   }
